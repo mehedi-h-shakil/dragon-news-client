@@ -7,7 +7,7 @@ const BrandCarousel = () => {
   return (
     <Carousel>
       <Carousel.Item>
-        <img className="d-block w-100" src={Brand1} alt="Amazon" />
+        <img className="d-block w-100 " src={Brand1} alt="Amazon" />
       </Carousel.Item>
       <Carousel.Item>
         <img className="d-block w-100" src={Brand2} alt="CocaCola" />

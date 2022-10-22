@@ -2,7 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../../layout/Main";
 import Category from "../../pages/Category/Category/Category";
 import Home from "../../pages/Home/Home/Home";
+import Login from "../../pages/Login/Login";
 import News from "../../pages/News/News/News";
+import TermsAndCondition from "../../pages/Others/TermsAndCondition/TermsAndCondition";
+import Register from "../../pages/Register/Register";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const routes = createBrowserRouter([
   {
@@ -12,14 +16,35 @@ export const routes = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        loader: () => fetch("http://localhost:5000/news"),
       },
       {
         path: "/category/:id",
         element: <Category></Category>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/category/${params.id}`),
       },
       {
         path: "/news/:id",
-        element: <News></News>,
+        element: (
+          <PrivateRoute>
+            <News></News>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/news/${params.id}`),
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "/terms",
+        element: <TermsAndCondition></TermsAndCondition>,
       },
     ],
   },
